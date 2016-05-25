@@ -1,5 +1,6 @@
 package com.emilychen.espressotest;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -37,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
                 EditText text = (EditText) findViewById(R.id.editText);
                 TextView display = (TextView) findViewById(R.id.textView);
                 display.setText(text.getText().toString());
+
+                SharedPreferences sharedPreferences = getSharedPreferences("text", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("result", text.getText().toString());
+                editor.apply();
             }
         });
     }
@@ -61,5 +67,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void getString(View view) {
+        TextView newDisplay = (TextView) findViewById(R.id.textView);
+        SharedPreferences sharedPreferences = getSharedPreferences("text", MODE_PRIVATE);
+        String result = sharedPreferences.getString("result", "");
+        newDisplay.setText(new StringBuffer(result).reverse().toString());
     }
 }

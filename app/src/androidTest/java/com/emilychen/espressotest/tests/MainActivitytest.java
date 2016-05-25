@@ -44,4 +44,13 @@ public class MainActivitytest {
         String expectedText = "emily";
         onView(withId(R.id.textView)).check(matches(withText(expectedText)));
     }
+
+    @Test
+    public void reverse() {
+        onView(withId(R.id.editText)).perform(typeText("CSE 110"), ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.button)).perform(click());
+        onView(withId(R.id.button2)).perform(click());
+        String reverseText = "011 ESC";
+        onView(withId(R.id.textView)).check(matches(withText(reverseText)));
+    }
 }
